@@ -2,6 +2,7 @@ package com.example.proyectodsa_android.activity;
 
 import android.os.Bundle;
 import android.widget.Toast;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,10 +33,16 @@ public class MessageActivity extends AppCompatActivity {
 
         rvMessages = findViewById(R.id.messages);
 
+        apiService = RetrofitClient.getInstance().getApi();
+        if(apiService == null){
+            Log.e("MessageActivity","ApiService is null");
+        }
+
+        messageAdapter = new MessageAdapter();
+        rvMessages.setAdapter(messageAdapter);
         rvMessages.setLayoutManager(new LinearLayoutManager(this));
 
         loadMessages();
-        apiService = RetrofitClient.getInstance().getApi();
     }
 
     private void loadMessages(){
@@ -43,11 +50,10 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
                 if(response.isSuccessful() && response.body()!=null){
-                    List<Message> messageList = response.body();
-                    messageAdapter.setMessages(messageList);
+                    messageAdapter.setMessages(response.body());
                 }else {
                     Toast.makeText(MessageActivity.this,
-                            "Error loading store items: " + response.code(),
+                            "Error loading messages: " + response.code(),
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -55,7 +61,7 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Message>> call, Throwable t) {
                 Toast.makeText(MessageActivity.this,
-                        "Error loading store items: " + t.getMessage(),
+                        "Error loading messages: " + t.getMessage(),
                         Toast.LENGTH_SHORT).show();
             }
         });

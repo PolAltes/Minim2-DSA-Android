@@ -9,14 +9,6 @@ public class Message {
     @Expose
     private String messageID;
 
-    @SerializedName("idOrigin")
-    @Expose
-    private String idOrigin;
-
-    @SerializedName("idTarget")
-    @Expose
-    private String idTarget;
-
     @SerializedName("info")
     @Expose
     private String info;
@@ -31,22 +23,6 @@ public class Message {
         this.messageID = messageID;
     }
 
-    public String getIdOrigin() {
-        return idOrigin;
-    }
-
-    public void setIdOrigin(String idOrigin) {
-        this.idOrigin = idOrigin;
-    }
-
-    public String getIdTarget() {
-        return idTarget;
-    }
-
-    public void setIdTarget(String idTarget) {
-        this.idTarget = idTarget;
-    }
-
     public String getInfo() {
         return info;
     }
@@ -57,6 +33,6 @@ public class Message {
 
     @Override
     public String toString(){
-        return ("Message{ "+"messageID:"+messageID+'\''+",Origin:"+idOrigin+'\''+",Target:"+idTarget+'\''+",Information:"+info+"}");
+        return ("Message{ "+"messageID:"+messageID+'\''+",Information:"+info+"}");
     }
 }

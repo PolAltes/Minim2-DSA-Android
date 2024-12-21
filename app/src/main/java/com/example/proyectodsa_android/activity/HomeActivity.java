@@ -90,9 +90,8 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         btnForum.setOnClickListener(v -> {
-            SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
-            prefs.edit().clear().apply();
-            redirectToLogin();
+            Intent intent = new Intent(this,MessageActivity.class);
+            startActivity(intent);
         });
 
     }

@@ -17,8 +17,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     private List<Message> messages = new ArrayList<>();
 
-    public MessageAdapter (List<Message> messages){
-        this.setMessages(messages);
+    public MessageAdapter (){
     }
 
     public void setMessages(List<Message> messageList){
@@ -26,11 +25,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     }
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView;
+        TextView tvMessage;
 
-        public MessageViewHolder(View itemView) {
+         MessageViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.textView);
+            tvMessage = itemView.findViewById(R.id.tvMessage);
+        }
+
+        void bind(Message item){
+             tvMessage.setText(item.getInfo());
         }
     }
 
@@ -45,7 +48,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
         Message message = messages.get(position);
-        holder.textView.setText(message.getInfo());
+        holder.bind(message);
     }
 
     @Override

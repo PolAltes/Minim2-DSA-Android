@@ -1,1 +1,1 @@
-Versió del Mínim 2 - Android (sense revisar el funcionament)
+Versió del Mínim 2 - Android (Funciona la recepció de missatges i porta a la pestanya del fórum, però no aconsegueixo que es vegin els missatges al ReciclerView)
